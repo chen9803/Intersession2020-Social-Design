@@ -1,0 +1,10 @@
+.answerBox{
+    border-style: solid;
+    border-color: black;
+    width: 300px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#scoreContainer{
+    text-align: center;
+}

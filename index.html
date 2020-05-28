@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Lab Sim Quiz Prototype</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+        <script type="text/javascript" src="script.js"></script>
+
+    
+    </head>
+
+    <body>
+        <div id="scoreContainer">
+            <h3 >Score: </h3>
+            <h3 id="scoreValue">0</h3>
+        </div>
+
+
+        <h1>Answer the following: </h1>
+        
+        <h3 id="question">What color is the sky?</h3>
+
+        <div id="wrongAnswer" class="answerBox" onclick = "choseWrong()">
+            <p id="answerText1">red</p>
+        </div>
+
+        <div id="correctAnswer" class="answerBox" onclick = "choseCorrect()">
+            <p id="answerText2">blue</p>
+        </div>
+
+        <div id="feedbackContainer">
+            <p id="feedback"></p>
+        </div>
+    </body>
+</html>
