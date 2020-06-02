@@ -8,3 +8,8 @@
 #scoreContainer{
     text-align: center;
 }
+#finalScoreBox{
+    margin: auto;
+    text-align: center;
+    border-color: black;
+}

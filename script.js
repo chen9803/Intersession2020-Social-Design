@@ -1,60 +1,130 @@
-var score = 0;
-var questionNumber = 0;
-//var questionList = JSON.parse({"questions":[{"prompt":"What color is the sky"
-//},
-//{"prompt":"What is 4+7?"}]});
-//if right answer is chosen add 1 to score and give feedback "correct"
-//then move on to next question
+let score = 0;
+let questionNumber = 0;
+let firstTry = true;
+flip1 = Math.floor(Math.random() * 4) + 1;
+flip2 = Math.floor(Math.random() * 4) + 1;
+while (flip1 == flip2) {
+    flip2 = Math.floor(Math.random() * 4) + 1
+}
+flip3 = Math.floor(Math.random() * 4) + 1;
+while (flip3 == flip1 || flip3 == flip2) {
+    flip3 = Math.floor(Math.random() * 4) + 1;
+}
+flip4 = 10 - (flip1 + flip2 + flip3)
+console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
+
+window.onload = function () {
+    this.setup();
+}
+
+function setup() {
+    document.getElementById("question").innerText = questionList[0].prompt;
+    document.getElementById("choice" + flip1).innerText = questionList[0].correctAnswer
+    document.getElementById("choice" + flip2).innerText = questionList[0].wrongAnswer1
+    document.getElementById("choice" + flip3).innerText = questionList[0].wrongAnswer2
+    document.getElementById("choice" + flip4).innerText = questionList[0].wrongAnswer3
+}
+
+function evalAnswer(choice) {
+    if (choice === flip1) {
+        choseCorrect();
+    } else {
+        choseWrong();
+    }
+}
+
 function choseCorrect() {
-    score++;
-    document.getElementById("scoreValue").innerHTML = score;
-    document.getElementById("feedback").innerHTML = "good job!"
+    if (firstTry == true) {
+        score++;
+    }
+    questionNumber++;
+    firstTry = true;
+    document.getElementById("scoreValue").innerText = score;
+    document.getElementById("feedback").innerText = "good job!"
     nextQuestion();
 }
 
 //if wrong answer is chosen display hints/feedback below answer 
-//fix later to work with pulling from json
 function choseWrong() {
-    document.getElementById("feedback").innerHTML = "look up at the sky again"
+    document.getElementById("feedback").innerText = questionList[questionNumber].feedback;
+    firstTry = false;
 }
 
-//probably cycle through a list of questions in a json
+//cycles through questions
 function nextQuestion() {
-    questionNumber++;
-    console.log("question #" + (questionNumber + 1));
-    
-    switch (questionNumber){
-        case 0:
-            document.getElementById("question").innerHTML = "What color is the sky?" 
-            
-        case 1:
-            document.getElementById("question").innerHTML = "What is 4+7?"
-            //randomizeAnswers();
-            document.getElementById("correctAnswer").innerHTML = "11"
-            document.getElementById("wrongAnswer").innerHTML = "14"
-            break;
-        case 2:
-            document.getElementById("question").innerHTML = "What year is it?"
-            //randomizeAnswers();
-            document.getElementById("correctAnswer").innerHTML = "2020"
-            document.getElementById("wrongAnswer").innerHTML = "1982"
-            break;
-             //document.getElementById("question").innerHTML = questionList[questionNumber].prompt;
 
-        //blanks out when finished     
+
+    console.log("question #" + (questionNumber + 1));
+
+    //randomly assign choice number to answer
+    flip1 = Math.floor(Math.random() * 4) + 1;
+    flip2 = Math.floor(Math.random() * 4) + 1;
+    while (flip1 == flip2) {
+        flip2 = Math.floor(Math.random() * 4) + 1
+    }
+    flip3 = Math.floor(Math.random() * 4) + 1;
+    while (flip3 == flip1 || flip3 == flip2) {
+        flip3 = Math.floor(Math.random() * 4) + 1;
+    }
+    flip4 = 10 - (flip1 + flip2 + flip3)
+    console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
+
+    switch (questionNumber) {
+        case 0:
+        case 1:
+        case 2:
+
+            document.getElementById("question").innerText = questionList[questionNumber].prompt;
+            document.getElementById("choice" + flip1).innerText = questionList[questionNumber].correctAnswer
+            document.getElementById("choice" + flip2).innerText = questionList[questionNumber].wrongAnswer1
+            document.getElementById("choice" + flip3).innerText = questionList[questionNumber].wrongAnswer2
+            document.getElementById("choice" + flip4).innerText = questionList[questionNumber].wrongAnswer3
+
+            break;
+
+
+        //when finished     
         default:
             console.log("finished")
-            document.body.style.visibility = "hidden";
-            }
+            //displayScore();
+    }
 }
 //will try implementing answer numbering system in order to id swap 
 function randomizeAnswers() {
-    var flip = Math.floor(Math.random() * 2) + 1;
-    console.log(flip)
-    if (flip == 1) {
-        
-        document.getElementById("correctanswer").id = "wrongAnswer";
-        document.getElementById("wrongAnswer").id = "correctAnswer";
-        
+    let flip1 = Math.floor(Math.random() * 4) + 1;
+    let flip2 = Math.floor(Math.random() * 4) + 1;
+    while (flip1 == flip2) {
+        flip2 = Math.floor(Math.random() * 4) + 1
     }
+    let flip3 = Math.floor(Math.random() * 4) + 1;
+    while (flip3 == flip1 || flip3 == flip2) {
+        flip3 = Math.floor(Math.random() * 4) + 1;
+    }
+    let flip4 = 10 - (flip1 + flip2 + flip3)
+    console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
 }
+//only redirects so far
+function displayScore() {
+    window.location.replace("final_score_page.html")
+    window.onload = function () {
+        document.getElementById("finalScore").innerText = "Your final score is " + score
+    }
+
+}
+
+document.getElementById("choice1").addEventListener("click", function () {
+    evalAnswer(1);
+});
+
+document.getElementById("choice2").addEventListener("click", function () {
+    evalAnswer(2);
+});
+
+document.getElementById("choice3").addEventListener("click", function () {
+    evalAnswer(3);
+});
+
+document.getElementById("choice4").addEventListener("click", function () {
+    evalAnswer(4);
+});
+
