@@ -1,16 +1,16 @@
 let score = 0;
 let questionNumber = 0;
 let firstTry = true;
-flip1 = Math.floor(Math.random() * 4) + 1;
-flip2 = Math.floor(Math.random() * 4) + 1;
+let flip1 = Math.floor(Math.random() * 4) + 1;
+let flip2 = Math.floor(Math.random() * 4) + 1;
 while (flip1 == flip2) {
     flip2 = Math.floor(Math.random() * 4) + 1
 }
-flip3 = Math.floor(Math.random() * 4) + 1;
+let flip3 = Math.floor(Math.random() * 4) + 1;
 while (flip3 == flip1 || flip3 == flip2) {
     flip3 = Math.floor(Math.random() * 4) + 1;
 }
-flip4 = 10 - (flip1 + flip2 + flip3)
+let flip4 = 10 - (flip1 + flip2 + flip3)
 console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
 
 window.onload = function () {
@@ -57,16 +57,7 @@ function nextQuestion() {
     console.log("question #" + (questionNumber + 1));
 
     //randomly assign choice number to answer
-    flip1 = Math.floor(Math.random() * 4) + 1;
-    flip2 = Math.floor(Math.random() * 4) + 1;
-    while (flip1 == flip2) {
-        flip2 = Math.floor(Math.random() * 4) + 1
-    }
-    flip3 = Math.floor(Math.random() * 4) + 1;
-    while (flip3 == flip1 || flip3 == flip2) {
-        flip3 = Math.floor(Math.random() * 4) + 1;
-    }
-    flip4 = 10 - (flip1 + flip2 + flip3)
+    randomizeAnswers();
     console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
 
     switch (questionNumber) {
@@ -89,20 +80,20 @@ function nextQuestion() {
             //displayScore();
     }
 }
-//will try implementing answer numbering system in order to id swap 
+
 function randomizeAnswers() {
-    let flip1 = Math.floor(Math.random() * 4) + 1;
-    let flip2 = Math.floor(Math.random() * 4) + 1;
+    flip1 = Math.floor(Math.random() * 4) + 1;
+    flip2 = Math.floor(Math.random() * 4) + 1;
     while (flip1 == flip2) {
         flip2 = Math.floor(Math.random() * 4) + 1
     }
-    let flip3 = Math.floor(Math.random() * 4) + 1;
+    flip3 = Math.floor(Math.random() * 4) + 1;
     while (flip3 == flip1 || flip3 == flip2) {
         flip3 = Math.floor(Math.random() * 4) + 1;
     }
-    let flip4 = 10 - (flip1 + flip2 + flip3)
-    console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
+    flip4 = 10 - (flip1 + flip2 + flip3)
 }
+
 //only redirects so far
 function displayScore() {
     window.location.replace("final_score_page.html")
@@ -115,15 +106,12 @@ function displayScore() {
 document.getElementById("choice1").addEventListener("click", function () {
     evalAnswer(1);
 });
-
 document.getElementById("choice2").addEventListener("click", function () {
     evalAnswer(2);
 });
-
 document.getElementById("choice3").addEventListener("click", function () {
     evalAnswer(3);
 });
-
 document.getElementById("choice4").addEventListener("click", function () {
     evalAnswer(4);
 });

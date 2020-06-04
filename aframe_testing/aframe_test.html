@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello, WebVR! • A-Frame</title>
+  <meta name="description" content="Hello, WebVR! • A-Frame">
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script type="text/javascript" src="../question_bank.js"></script>
+</head>
+
+<body>
+  <script>
+    let score = 0;
+    let questionNumber = 0;
+    let firstTry = true;
+    let flip1 = Math.floor(Math.random() * 4) + 1;
+    let flip2 = Math.floor(Math.random() * 4) + 1;
+    while (flip1 == flip2) {
+      flip2 = Math.floor(Math.random() * 4) + 1
+    }
+    let flip3 = Math.floor(Math.random() * 4) + 1;
+    while (flip3 == flip1 || flip3 == flip2) {
+      flip3 = Math.floor(Math.random() * 4) + 1;
+    }
+    let flip4 = 10 - (flip1 + flip2 + flip3)
+    console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
+    
+    
+    AFRAME.registerComponent('scorebox', {
+      init: function () {
+        var el = this.el
+        el.setAttribute("text", "value", "Score " + score)
+        this.el.addEventListener("click", function () {
+          score++;
+          el.setAttribute("text", "value", "Score " + score)
+        })
+
+        console.log("test")
+      }
+    });
+    
+    AFRAME.registerComponent('promptbox', {
+      init: function () {
+        var el = this.el
+        el.setAttribute("text", "value", questionList[0].prompt)
+      }});
+    </script>
+  <a-scene background="color: #FAFAFA">
+    <a-entity scorebox id="scoreValue" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
+      text="value: test; color: black; align: center" position="0 4 -3"></a-entity>
+
+      <a-entity promptbox id="question" geometry="primitive: plane; width: 4; height: auto" material="color: white"
+      text='value: test; color: black; align: left' position='-2 3 -3'></a-entity>
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+    <a-camera><a-cursor id="cursor"></a-cursor></a-camera>
+  </a-scene>
+
+  <script type="text/javascript" src="aframe_test_script.js"></script>
+  
+</body>
+
+</html>
