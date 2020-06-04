@@ -6,57 +6,128 @@
   <meta name="description" content="Hello, WebVR! • A-Frame">
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script type="text/javascript" src="../question_bank.js"></script>
+  <script type="text/javascript" src="aframe_test_script.js"></script>
 </head>
 
 <body>
   <script>
-    let score = 0;
-    let questionNumber = 0;
-    let firstTry = true;
-    let flip1 = Math.floor(Math.random() * 4) + 1;
-    let flip2 = Math.floor(Math.random() * 4) + 1;
-    while (flip1 == flip2) {
-      flip2 = Math.floor(Math.random() * 4) + 1
-    }
-    let flip3 = Math.floor(Math.random() * 4) + 1;
-    while (flip3 == flip1 || flip3 == flip2) {
-      flip3 = Math.floor(Math.random() * 4) + 1;
-    }
-    let flip4 = 10 - (flip1 + flip2 + flip3)
-    console.log(flip1 + " " + flip2 + " " + flip3 + " " + flip4)
-    
-    
+
+    //sets up all containers and text
     AFRAME.registerComponent('scorebox', {
-      init: function () {
+      update: function () {
         var el = this.el
         el.setAttribute("text", "value", "Score " + score)
-        this.el.addEventListener("click", function () {
-          score++;
-          el.setAttribute("text", "value", "Score " + score)
-        })
-
-        console.log("test")
       }
     });
-    
+
     AFRAME.registerComponent('promptbox', {
       init: function () {
         var el = this.el
-        el.setAttribute("text", "value", questionList[0].prompt)
-      }});
-    </script>
+        el.setAttribute("text", "value", questionList[questionNumber].prompt)
+      }
+    });
+
+    //setting up answer boxes
+    AFRAME.registerComponent('choice' + flip1, {
+      update: function () {
+        var el = this.el
+        el.setAttribute("text", "value", questionList[questionNumber].correctAnswer)
+        this.el.addEventListener("mouseenter", function(){
+          el.setAttribute("material", "color", "yellow")
+        });
+        this.el.addEventListener("mouseleave", function(){
+          el.setAttribute("material", "color", "#4CC3D9")
+        });
+      }
+    });
+
+    AFRAME.registerComponent('choice' + flip2, {
+      update: function () {
+        var el = this.el
+        el.setAttribute("text", "value", questionList[questionNumber].wrongAnswer1)
+        this.el.addEventListener("mouseenter", function(){
+          el.setAttribute("material", "color", "yellow")
+        });
+        this.el.addEventListener("mouseleave", function(){
+          el.setAttribute("material", "color", "#4CC3D9")
+        });
+
+      }
+    });
+
+    AFRAME.registerComponent('choice' + flip3, {
+      update: function () {
+        var el = this.el
+        el.setAttribute("text", "value", questionList[questionNumber].wrongAnswer2)
+        this.el.addEventListener("mouseenter", function(){
+          el.setAttribute("material", "color", "yellow")
+        });
+        this.el.addEventListener("mouseleave", function(){
+          el.setAttribute("material", "color", "#4CC3D9")
+        });
+
+      }
+    });
+
+    AFRAME.registerComponent('choice' + flip4, {
+      update: function () {
+        var el = this.el
+        el.setAttribute("text", "value", questionList[questionNumber].wrongAnswer3)
+        this.el.addEventListener("mouseenter", function(){
+          el.setAttribute("material", "color", "yellow")
+        });
+        this.el.addEventListener("mouseleave", function(){
+          el.setAttribute("material", "color", "#4CC3D9")
+        });
+
+      }
+    });
+  </script>
+
+
+<!--aframe elements-->
   <a-scene background="color: #FAFAFA">
     <a-entity scorebox id="scoreValue" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
       text="value: test; color: black; align: center" position="0 4 -3"></a-entity>
 
-      <a-entity promptbox id="question" geometry="primitive: plane; width: 4; height: auto" material="color: white"
-      text='value: test; color: black; align: left' position='-2 3 -3'></a-entity>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
-    <a-camera><a-cursor id="cursor"></a-cursor></a-camera>
+    <a-entity promptbox id="question" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
+      text='value: test; color: black; align: left' position='-3 3.5 -3'></a-entity>
+
+    <a-entity choice1 id="choice1" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
+      text='value: test; color: black; align: center' position='0 3 -3'></a-entity>
+
+    <a-entity choice2 id="choice2" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
+      text='value: test; color: black; align: center' position='0 2.5 -3'></a-entity>
+
+    <a-entity choice3 id="choice3" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
+      text='value: test; color: black; align: center' position='0 2 -3'></a-entity>
+
+    <a-entity choice4 id="choice4" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
+      text='value: test; color: black; align: center' position='0 1.5 -3'></a-entity>
+
+
+    <a-camera>
+      <a-cursor id="cursor"></a-cursor>
+    </a-camera>
+
+    
+    <script>
+      //click events
+      document.getElementById("choice1").addEventListener("click", function () {
+          evalAnswer(1);
+      });
+      document.getElementById("choice2").addEventListener("click", function () {
+          evalAnswer(2);
+      });
+      document.getElementById("choice3").addEventListener("click", function () {
+          evalAnswer(3);
+      });
+      document.getElementById("choice4").addEventListener("click", function () {
+          evalAnswer(4);
+      });</script>
   </a-scene>
 
-  <script type="text/javascript" src="aframe_test_script.js"></script>
-  
+
 </body>
 
 </html>
