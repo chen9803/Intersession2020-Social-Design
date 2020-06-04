@@ -2,8 +2,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Hello, WebVR! • A-Frame</title>
-  <meta name="description" content="Hello, WebVR! • A-Frame">
+  <title>Aframe Quiz Prototype</title>
+  <meta name="description" content="Aframe Quiz Prototype">
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script type="text/javascript" src="../question_bank.js"></script>
   <script type="text/javascript" src="aframe_test_script.js"></script>
@@ -51,7 +51,6 @@
         this.el.addEventListener("mouseleave", function(){
           el.setAttribute("material", "color", "#4CC3D9")
         });
-
       }
     });
 
@@ -65,7 +64,6 @@
         this.el.addEventListener("mouseleave", function(){
           el.setAttribute("material", "color", "#4CC3D9")
         });
-
       }
     });
 
@@ -79,7 +77,6 @@
         this.el.addEventListener("mouseleave", function(){
           el.setAttribute("material", "color", "#4CC3D9")
         });
-
       }
     });
   </script>
@@ -87,24 +84,26 @@
 
 <!--aframe elements-->
   <a-scene background="color: #FAFAFA">
-    <a-entity scorebox id="scoreValue" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
-      text="value: test; color: black; align: center" position="0 4 -3"></a-entity>
+    <a-entity scorebox id="scoreValue" class="temp" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
+      text="value: test; color: black; align: center" position="0 3.5 -3"></a-entity>
 
-    <a-entity promptbox id="question" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
-      text='value: test; color: black; align: left' position='-3 3.5 -3'></a-entity>
+    <a-entity promptbox id="question" class="temp" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
+      text='value: test; color: black; align: left' position='-3 3 -3'></a-entity>
 
-    <a-entity choice1 id="choice1" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
-      text='value: test; color: black; align: center' position='0 3 -3'></a-entity>
-
-    <a-entity choice2 id="choice2" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
+    <a-entity choice1 id="choice1" class="temp" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9; opacity: 100"
       text='value: test; color: black; align: center' position='0 2.5 -3'></a-entity>
 
-    <a-entity choice3 id="choice3" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
+    <a-entity choice2 id="choice2" class="temp" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9; opacity: 100"
       text='value: test; color: black; align: center' position='0 2 -3'></a-entity>
 
-    <a-entity choice4 id="choice4" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9"
+    <a-entity choice3 id="choice3" class="temp" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9; opacity: 100"
       text='value: test; color: black; align: center' position='0 1.5 -3'></a-entity>
 
+    <a-entity choice4 id="choice4" class="temp" geometry="primitive: plane; width: 4; height: auto" material="color:#4CC3D9; opacity: 100"
+      text='value: test; color: black; align: center' position='0 1 -3'></a-entity>
+
+    <a-entity feedback id="feedback" class="temp" geometry="primitive: plane; width: 4; height: auto" material="opacity:0"
+    text='value: ; color: black; align: left' position='-3 0.75 -3'></a-entity>  
 
     <a-camera>
       <a-cursor id="cursor"></a-cursor>
@@ -124,7 +123,8 @@
       });
       document.getElementById("choice4").addEventListener("click", function () {
           evalAnswer(4);
-      });</script>
+      });
+</script>
   </a-scene>
 
 
