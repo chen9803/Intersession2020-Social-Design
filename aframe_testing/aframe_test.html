@@ -28,7 +28,7 @@
     });
 
     //setting up answer boxes
-    AFRAME.registerComponent('choice' + flip1, {
+    AFRAME.registerComponent('choice' + answer1, {
       update: function () {
         var el = this.el
         el.setAttribute("text", "value", questionList[questionNumber].correctAnswer)
@@ -41,7 +41,7 @@
       }
     });
 
-    AFRAME.registerComponent('choice' + flip2, {
+    AFRAME.registerComponent('choice' + answer2, {
       update: function () {
         var el = this.el
         el.setAttribute("text", "value", questionList[questionNumber].wrongAnswer1)
@@ -55,7 +55,7 @@
       }
     });
 
-    AFRAME.registerComponent('choice' + flip3, {
+    AFRAME.registerComponent('choice' + answer3, {
       update: function () {
         var el = this.el
         el.setAttribute("text", "value", questionList[questionNumber].wrongAnswer2)
@@ -69,7 +69,7 @@
       }
     });
 
-    AFRAME.registerComponent('choice' + flip4, {
+    AFRAME.registerComponent('choice' + answer4, {
       update: function () {
         var el = this.el
         el.setAttribute("text", "value", questionList[questionNumber].wrongAnswer3)
