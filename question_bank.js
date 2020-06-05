@@ -1,3 +1,5 @@
+//question array, just add prompt and 4 answers for it to appear on quiz
+//chose not to add in specific feedback but field is provided
 const questionList =
     [
         {

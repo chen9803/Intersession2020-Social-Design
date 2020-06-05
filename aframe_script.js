@@ -1,5 +1,6 @@
 let score = 0;
 let final_score;
+let percent_grade;
 let questionNumber = 0;
 let firstTry = true;
 
@@ -14,7 +15,7 @@ while (answer3 == answer1 || answer3 == answer2) {
     answer3 = Math.floor(Math.random() * 4) + 1;
 }
 let answer4 = 10 - (answer1 + answer2 + answer3)
-console.log(answer1 + " " + answer2 + " " + answer3 + " " + answer4)
+//console.log(answer1 + " " + answer2 + " " + answer3 + " " + answer4)
 
 //if user finds answer1 then call choseCorrect, calls choseWrong if not answer1
 function evalAnswer(choice) {
@@ -52,8 +53,8 @@ function choseWrong() {
 //cycles through questions in array and updates answer numbers
 function nextQuestion() {
     randomizeAnswers();
-    //console.log(answer1 + " " + answer2 + " " + answer3 + " " + answer4)
 
+    //optional to switch this to if (questionNumber < questionList.length)
     switch (questionNumber) {
         case 0:
         case 1:
@@ -66,13 +67,17 @@ function nextQuestion() {
             document.querySelector("#choice" + answer4).setAttribute("text", "value", questionList[questionNumber].wrongAnswer3);
             break;
 
-        //when finished with quiz   
+        //when finished with quiz make everything disappear and use feedback box to give grade 
         default:
             console.log("finished")
-            final_score = score;
-            document.querySelector("#scoreValue").setAttribute("text", "value", "Score: " + final_score);
-            document.querySelector("#question").setAttribute("text", "value", "");
 
+            //so that score can't be changed
+            final_score = score;
+            percent_grade = (final_score / questionNumber) * 100
+            document.querySelector("#scoreValue").setAttribute("text", "value", "Score: " + final_score);
+            
+            //make everything transparent
+            document.querySelector("#question").setAttribute("text", "value", "");
             document.querySelector("#choice" + answer1).setAttribute("text", "value", "");
             document.querySelector("#choice" + answer1).setAttribute("material", "opacity", "0");
 
@@ -85,7 +90,8 @@ function nextQuestion() {
             document.querySelector("#choice" + answer4).setAttribute("text", "value", "");
             document.querySelector("#choice" + answer4).setAttribute("material", "opacity", "0");
 
-            document.querySelector("#feedback").setAttribute("text", "value", "Your grade is " + (final_score / questionNumber) * 100 + "%");
+            //give final grade
+            document.querySelector("#feedback").setAttribute("text", "value", "Your grade is " + percent_grade.toFixed(2) + "%");
             document.querySelector("#feedback").setAttribute("text", "align", "center");
             document.querySelector("#feedback").setAttribute("position", "0 1.5 -3");
     }
