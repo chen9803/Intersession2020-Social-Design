@@ -21,7 +21,7 @@ const questionList =
         },
         {
             "prompt": "What year is it?",
-            "correctAnswer": "2020",
+            "correctAnswer": "2021",
             "wrongAnswer1": "1982",
             "wrongAnswer2": "1283",
             "wrongAnswer3": "2019",
